@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>Total expense: Rs. {{"%.2f"|format(total) }}</h3>
+
+{% if breakdown %}
+    <p>Highest spending: <strong>{{highest.description if highest.description else highest.category}}</strong>(Rs. {{ "%.2f"|format(highest.amount)}})</p>
+
+    <ul class="breakdown-list">
+        {% for cat, amt in breakdown.items() %}
+            <li>
+                {{ cat }}: Rs. {{ "%.2f"|format(amt)}}
+                {% if total > 0 %}
+                    ({{ (amt/total*100) | round(1) }}%)
+                {% else %}
+                    (0%)
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No expenses recorded yet.</p>
+{% endif %}
+{% endblock %}
