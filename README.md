@@ -1,3 +1,8 @@
+**Live demo:** https://expense-tracker-web-0bhp.onrender.com/
+
+*Note: Hosted on Render's free tier, so the first load after a quiet period may take 30–50 seconds to wake up.*
+
+
 # Expense Tracker
 
 A flask based web application where users track personal expenses and view category summaries. Every user has separate account so the user only sees their own expenses.
