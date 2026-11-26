@@ -6,11 +6,17 @@ from datetime import date, datetime
 import math, io, csv
 from sqlalchemy import func
 import os
+import sys
 
 with app.app_context():
     db.create_all()
 
-app.secret_key = os.environ.get("SECRET_KEY", "dev-key-only")
+secret_key = os.environ.get("SECRET_KEY")
+if not secret_key and "pytest" not in sys.modules:
+    raise RuntimeError("SECRET_KEY environment variable is required outside of tests.")
+
+app.config["SECRET_KEY"] = secret_key or "test-fallback-key"
+
 CATEGORIES = ["Food", "Entertainment", "Utilities", "Shopping", "Transportation", "Others"]
 
 login_manager = LoginManager(app)
