@@ -12,10 +12,10 @@ with app.app_context():
     db.create_all()
 
 secret_key = os.environ.get("SECRET_KEY")
-if not secret_key and "pytest" not in sys.modules:
-    raise RuntimeError("SECRET_KEY environment variable is required outside of tests.")
+if not secret_key:
+    raise RuntimeError("SECRET_KEY environment variable is required.")
 
-app.config["SECRET_KEY"] = secret_key or "test-fallback-key"
+app.config["SECRET_KEY"] = secret_key
 
 CATEGORIES = ["Food", "Entertainment", "Utilities", "Shopping", "Transportation", "Others"]
 
